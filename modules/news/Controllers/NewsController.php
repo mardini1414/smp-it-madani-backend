@@ -45,6 +45,7 @@ class NewsController extends BaseController
     {
         $news = $this->newsService->getBySlug($slug);
         if ($news) {
+            $news['image'] = base_url() . $news['image'];
             $data = [
                 'data' => $news
             ];

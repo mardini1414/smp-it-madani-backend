@@ -36,7 +36,6 @@ class NewsService
     public function getBySlug($slug)
     {
         $news = $this->newsModel->where('slug', $slug)->first();
-        $news['image'] = base_url() . $news['image'];
         return $news;
     }
 
