@@ -24,7 +24,10 @@ class NewsService
 
     public function getAll()
     {
-        $news = $this->newsModel->paginate(10);
+        $news = $this->newsModel
+            ->select('id,title,slug,author,image,created_at')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
         $pager = $this->newsModel->pager->getDetails();
         $data = [
             'data' => $this->getMappedNews($news),
@@ -72,11 +75,9 @@ class NewsService
                 'id' => $news['id'],
                 'title' => $news['title'],
                 'slug' => $news['slug'],
-                'body' => $news['body'],
                 'author' => $news['author'],
                 'image' => base_url() . $news['image'],
                 'created_at' => $news['created_at'],
-                'updated_at' => $news['updated_at']
             ];
         }, $newsArray);
         return $mappedNews;
