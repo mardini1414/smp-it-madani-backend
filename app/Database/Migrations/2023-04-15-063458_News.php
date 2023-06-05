@@ -45,11 +45,11 @@ class News extends Migration
         ];
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('id');
-        $this->forge->createTable('news');
+        $this->forge->createTable('news', true);
     }
 
     public function down()
     {
-        $this->forge->dropTable('news');
+        $this->forge->dropTable('news', true);
     }
 }

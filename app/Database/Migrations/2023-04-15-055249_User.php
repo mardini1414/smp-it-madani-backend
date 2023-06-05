@@ -10,8 +10,9 @@ class User extends Migration
     {
         $fields = [
             'id' => [
-                'type' => 'VARCHAR',
-                'constraint' => 36,
+                'type' => 'INT',
+                'unsigned' => true,
+                'auto_increment' => true,
             ],
             'username' => [
                 'type' => 'VARCHAR',
@@ -42,7 +43,7 @@ class User extends Migration
 
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('id');
-        $this->forge->createTable('users');
+        $this->forge->createTable('users', true);
     }
 
     public function down()

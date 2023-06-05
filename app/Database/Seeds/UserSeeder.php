@@ -16,6 +16,6 @@ class UserSeeder extends Seeder
             'password' => 'madaniadmin'
         ];
         $userModel = new User();
-        $userModel->save($data);
+        $userModel->insert($data);
     }
 }

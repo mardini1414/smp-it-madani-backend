@@ -29,6 +29,8 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->group('students', function ($routes) {
     $routes->get('', 'StudentController::getUser', ['filter' => 'auth']);
+    $routes->post('import', 'StudentController::import', ['filter' => 'auth']);
+    $routes->delete('', 'StudentController::deleteAll', ['filter' => 'auth']);
 });
 
 /*

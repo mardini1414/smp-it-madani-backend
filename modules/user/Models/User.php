@@ -3,11 +3,10 @@
 namespace Modules\User\Models;
 
 use CodeIgniter\Model;
-use App\Traits\UUIDTrait;
 
 class User extends Model
 {
-    use UUIDTrait;
+
     protected $DBGroup = 'default';
     protected $table = 'users';
     protected $primaryKey = 'id';
@@ -16,7 +15,7 @@ class User extends Model
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields = true;
-    protected $allowedFields = ['username', 'email', 'password'];
+    protected $allowedFields = ['username', 'email', 'password', 'role'];
 
     // Dates
     protected $useTimestamps = true;
@@ -33,7 +32,8 @@ class User extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert = ['generateIdWithUUID', 'hashPassword'];
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeInsertBatch = [];
     protected $afterInsert = [];
     protected $beforeUpdate = [];
     protected $afterUpdate = [];

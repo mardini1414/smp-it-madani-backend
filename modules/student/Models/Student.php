@@ -1,23 +1,20 @@
 <?php
 
-namespace Modules\News\Models;
+namespace Modules\Student\Models;
 
 use CodeIgniter\Model;
-use App\Traits\UUIDTrait;
-use Cocur\Slugify\Slugify;
 
-class News extends Model
+class Student extends Model
 {
-    use UUIDTrait;
     protected $DBGroup = 'default';
-    protected $table = 'news';
+    protected $table = 'students';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $insertID = 0;
     protected $returnType = 'array';
     protected $useSoftDeletes = false;
-    protected $protectFields = true;
-    protected $allowedFields = ['title', 'slug', 'author', 'image', 'body'];
+    protected $protectFields = false;
+    protected $allowedFields = [];
 
     // Dates
     protected $useTimestamps = true;
@@ -34,21 +31,12 @@ class News extends Model
 
     // Callbacks
     protected $allowCallbacks = true;
-    protected $beforeInsert = ['generateIdWithUUID', 'generateSlug'];
+    protected $beforeInsert = [];
     protected $afterInsert = [];
-    protected $beforeUpdate = ['generateSlug'];
+    protected $beforeUpdate = [];
     protected $afterUpdate = [];
     protected $beforeFind = [];
     protected $afterFind = [];
     protected $beforeDelete = [];
     protected $afterDelete = [];
-
-    protected function generateSlug($data)
-    {
-        $title = $data['data']['title'];
-        $slugify = new Slugify();
-        $slug = $slugify->slugify($title);
-        $data['data']['slug'] = $slug;
-        return $data;
-    }
 }
