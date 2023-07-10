@@ -31,7 +31,7 @@ class StudentController extends BaseController
         try {
             $this->studentService->importFromCSV($file);
         } catch (DatabaseException $e) {
-            return $this->respond(['message' => 'format csv salah'], 400);
+            return $this->respond(['message' => 'import gagal'], 400);
         }
         return $this->respondCreated(['message' => 'import berhasil']);
     }

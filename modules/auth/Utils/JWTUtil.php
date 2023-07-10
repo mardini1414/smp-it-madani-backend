@@ -9,7 +9,7 @@ class JWTUtil
 {
     public static function generate($user)
     {
-        $key = getenv('JWT_SECRET_KEY');
+        $key = env('JWT_SECRET_KEY');
         $expired = time() + 24 * 60 * 60;
         $payload = [
             'username' => $user['username'],
@@ -22,7 +22,7 @@ class JWTUtil
 
     public static function decode($jwt)
     {
-        $key = getenv('JWT_SECRET_KEY');
+        $key = env('JWT_SECRET_KEY');
         $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
         return $decoded;
     }

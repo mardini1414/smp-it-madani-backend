@@ -8,8 +8,10 @@
         "php": "^7.4 || ^8.0",
         "cocur/slugify": "^4.3",
         "codeigniter4/framework": "^4.0",
+        "duitkupg/duitku-php": "dev-master",
         "firebase/php-jwt": "^6.4",
         "league/csv": "9.8.0",
+        "mpdf/mpdf": "^8.1",
         "ramsey/uuid": "^4.7"
     },
     "require-dev": {

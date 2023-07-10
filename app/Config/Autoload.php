@@ -47,7 +47,9 @@ class Autoload extends AutoloadConfig
         'Modules\Auth' => ROOTPATH . 'modules/auth',
         'Modules\News' => ROOTPATH . 'modules/news',
         'Modules\File' => ROOTPATH . 'modules/file',
-        'Modules\Student' => ROOTPATH . 'modules/student'
+        'Modules\Student' => ROOTPATH . 'modules/student',
+        'Modules\Penerimaan' => ROOTPATH . 'modules/penerimaan',
+        'Modules\Tagihan' => ROOTPATH . 'modules/tagihan'
     ];
 
     /**

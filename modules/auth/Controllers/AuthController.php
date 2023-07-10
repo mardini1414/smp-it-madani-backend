@@ -34,7 +34,7 @@ class AuthController extends BaseController
     public function getUser()
     {
         $user = AuthUtil::getUser();
-        $data = ['user' => $user];
+        $data = ['data' => $user];
         return $this->respond($data);
     }
 }

@@ -29,10 +29,10 @@ class StudentService
         try {
             $this->db->transException(true)->transStart();
             foreach ($records as $record) {
-                $timeStamp = strtotime($record['tanggal lahir']);
+                $password = str_replace('/', '-', $record['tanggal lahir']);
+                $timeStamp = strtotime($password);
                 $date = date('Y-m-d', $timeStamp);
-                $password = str_replace('/', '', $record['tanggal lahir']);
-                $user = $this->userModel->insert([
+                $userId = $this->userModel->insert([
                     'username' => $record['nisn'],
                     'email' => $record['email'],
                     'password' => $password,
@@ -47,14 +47,14 @@ class StudentService
                     'nik_wali_murid' => $record['nik wali murid'],
                     'alamat' => $record['alamat'],
                     'status' => $record['status'],
-                    'user_id' => $user,
+                    'user_id' => $userId,
                     'kelas' => $record['kelas'],
                     'agama' => $record['agama']
                 ]);
             }
             $this->db->transComplete();
         } catch (DatabaseException $e) {
-            throw new DatabaseException();
+            throw new DatabaseException($e->getMessage());
         }
     }
 
