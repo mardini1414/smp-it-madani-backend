@@ -62,8 +62,9 @@ class TagihanController extends BaseController
 
     public function getByStudent()
     {
+        $status = $this->request->getVar('status');
         $user = AuthUtil::getUser();
-        $data = $this->tagihanService->getByStudent($user['id']);
+        $data = $this->tagihanService->getByStudent($user['id'], $status);
         return $this->respond(['data' => $data]);
     }
 
@@ -81,6 +82,13 @@ class TagihanController extends BaseController
     public function export()
     {
         $data = $this->tagihanService->export();
+        $this->response->setContentType('application/pdf');
+        return $data;
+    }
+
+    public function exportOne($id)
+    {
+        $data = $this->tagihanService->exportOne($id);
         $this->response->setContentType('application/pdf');
         return $data;
     }

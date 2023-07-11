@@ -35,6 +35,7 @@ $routes->group('tagihan', function ($routes) {
     $routes->delete('(:num)', 'TagihanController::cancle/$1', ['filter' => 'auth']);
     $routes->put('', 'TagihanController::cancle', ['filter' => 'auth']);
     $routes->get('export', 'TagihanController::export', ['filter' => 'auth']);
+    $routes->get('export/(:num)', 'TagihanController::exportOne/$1', ['filter' => 'auth']);
 });
 
 $routes->group('transaksi', function ($routes) {

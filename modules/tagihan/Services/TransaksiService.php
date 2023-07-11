@@ -82,7 +82,7 @@ class TransaksiService
         }
     }
 
-    private function getTransaction($id)
+    public function getTransaction($id)
     {
         $data = $this->db->table('transaksi')
             ->select(

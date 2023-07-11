@@ -14,6 +14,7 @@ class TagihanService
     private $tagihanModel;
     private $userModel;
     private $transaksiModel;
+    private $transaksiService;
     private $tagihanId;
 
     public function __construct()
@@ -22,6 +23,7 @@ class TagihanService
         $this->tagihanModel = new Tagihan();
         $this->userModel = new User();
         $this->transaksiModel = new Transaksi();
+        $this->transaksiService = new TransaksiService();
     }
 
     public function create($request)
@@ -55,8 +57,9 @@ class TagihanService
         return $data;
     }
 
-    public function getByStudent($userId)
+    public function getByStudent($userId, $status)
     {
+        $statusList = explode('|', $status);
         $data = $this->db->table('transaksi')
             ->select(
                 'transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
@@ -68,6 +71,7 @@ class TagihanService
             ->join('users', 'users.id = transaksi.user_id')
             ->join('students', 'students.user_id = users.id')
             ->where('transaksi.user_id', $userId)
+            ->whereIn('transaksi.status', $statusList)
             ->get()->getResult();
         return $data;
     }
@@ -85,6 +89,21 @@ class TagihanService
         $html = view('pdf/tagihan', ['data' => $data]);
         $mpdf->WriteHTML($html);
         return $mpdf->OutputHttpDownload('tagihan.pdf');
+    }
+
+
+    public function exportOne($id)
+    {
+        $data = $this->transaksiService->getTransaction($id);
+        $mpdf = new \Mpdf\Mpdf();
+        $html = view('pdf/bukti-pembayaran', ['data' => $data]);
+        $mpdf->WriteHTML($html);
+        return $mpdf->OutputHttpDownload('bukti-pembayaran.pdf');
+    }
+
+    public function exportByStudent()
+    {
+
     }
 
     private function createTransactionList()
