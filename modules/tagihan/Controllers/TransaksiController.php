@@ -17,8 +17,9 @@ class TransaksiController extends BaseController
     {
         $this->transaksiService = new TransaksiService();
     }
-    public function createInvoice($id)
+    public function createInvoice()
     {
+        $id = $this->request->getVar('transaksi_id');
         try {
             $data = $this->transaksiService->createInvoice($id);
             return $this->respond(['data' => $data]);

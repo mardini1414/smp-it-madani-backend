@@ -39,7 +39,7 @@ $routes->group('tagihan', function ($routes) {
 });
 
 $routes->group('transaksi', function ($routes) {
-    $routes->post('(:num)', 'TransaksiController::createInvoice/$1', ['filter' => 'auth']);
+    $routes->post('', 'TransaksiController::createInvoice', ['filter' => 'auth']);
     $routes->post('pay', 'TransaksiController::pay');
 });
 

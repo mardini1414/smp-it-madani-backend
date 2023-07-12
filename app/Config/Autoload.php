@@ -49,7 +49,8 @@ class Autoload extends AutoloadConfig
         'Modules\File' => ROOTPATH . 'modules/file',
         'Modules\Student' => ROOTPATH . 'modules/student',
         'Modules\Penerimaan' => ROOTPATH . 'modules/penerimaan',
-        'Modules\Tagihan' => ROOTPATH . 'modules/tagihan'
+        'Modules\Tagihan' => ROOTPATH . 'modules/tagihan',
+        'Modules\Rekapitulasi' => ROOTPATH . 'modules/rekapitulasi'
     ];
 
     /**
