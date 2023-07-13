@@ -42,7 +42,7 @@ class TagihanService
 
     public function getAll()
     {
-        $tagihan = $this->tagihanModel->findAll();
+        $tagihan = $this->tagihanModel->orderBy('created_at', 'DESC')->findAll();
         $total = $this->tagihanModel->selectSum('jumlah')->first();
         $data = [
             'data' => $tagihan,
@@ -72,6 +72,7 @@ class TagihanService
             ->join('students', 'students.user_id = users.id')
             ->where('transaksi.user_id', $userId)
             ->whereIn('transaksi.status', $statusList)
+            ->orderBy('transaksi.created_at', 'DESC')
             ->get()->getResult();
         return $data;
     }

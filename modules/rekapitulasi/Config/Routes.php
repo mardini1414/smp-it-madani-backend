@@ -28,7 +28,7 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->group('rekapitulasi', function ($routes) {
-    $routes->get('', 'RekapitulasiController::get', ['filter' => 'auth']);
+    $routes->get('', 'RekapitulasiController::getAll', ['filter' => 'auth']);
     $routes->get('export', 'RekapitulasiController::export', ['filter' => 'auth']);
     $routes->get('student', 'RekapitulasiController::getByStudent', ['filter' => 'auth']);
     $routes->get('export/student', 'RekapitulasiController::exportByStudent', ['filter' => 'auth']);

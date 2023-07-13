@@ -36,6 +36,19 @@ class StudentController extends BaseController
         return $this->respondCreated(['message' => 'import berhasil']);
     }
 
+    public function getAll()
+    {
+        $data = $this->studentService->getAll();
+        return $this->respond(['data' => $data]);
+    }
+
+    public function export()
+    {
+        $data = $this->studentService->export();
+        $this->response->setContentType('application/pdf');
+        return $data;
+    }
+
     public function deleteAll()
     {
         $this->studentService->deleteAll();

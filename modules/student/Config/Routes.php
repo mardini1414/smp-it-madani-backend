@@ -28,8 +28,9 @@ $routes->set404Override();
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->group('students', function ($routes) {
-    $routes->get('', 'StudentController::getUser', ['filter' => 'auth']);
+    $routes->get('', 'StudentController::getAll', ['filter' => 'auth']);
     $routes->post('import', 'StudentController::import', ['filter' => 'auth']);
+    $routes->get('export', 'StudentController::export', ['filter' => 'auth']);
     $routes->delete('', 'StudentController::deleteAll', ['filter' => 'auth']);
 });
 

@@ -22,6 +22,7 @@ class PenerimaanService
             $penerimaan = $this->penerimaanModel
                 ->where('YEAR(bulan_tahun)', $year)
                 ->where('MONTH(bulan_tahun)', $month)
+                ->orderBy('created_at', 'DESC')
                 ->findAll();
             $total = $this->penerimaanModel->selectSum('jumlah')
                 ->where('YEAR(bulan_tahun)', $year)

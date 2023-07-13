@@ -58,6 +58,21 @@ class StudentService
         }
     }
 
+    public function getAll()
+    {
+        $data = $this->studentModel->orderBy('created_at', 'DESC')->findAll();
+        return $data;
+    }
+
+    public function export()
+    {
+        $data = $this->getAll();
+        $mpdf = new \Mpdf\Mpdf();
+        $html = view('pdf/siswa', ['data' => $data]);
+        $mpdf->WriteHTML($html);
+        return $mpdf->OutputHttpDownload('siswa.pdf');
+    }
+
     public function deleteAll()
     {
         $isDeleted = $this->userModel
