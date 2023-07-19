@@ -19,7 +19,8 @@ class RekapitulasiService
             ->select(
                 'transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
                 tagihan.jatuh_tempo AS jatuh_tempo, tagihan.jumlah AS jumlah, 
-                transaksi.status AS status, students.nama AS nama_siswa, students.kelas AS kelas,
+                transaksi.status AS status,users.id AS user_id, students.nama AS nama_siswa, 
+                students.kelas AS kelas,
                 users.email AS email_siswa,
                 users.username AS NIS,
                 transaksi.created_at AS created_at, transaksi.updated_at AS updated_at'
@@ -45,6 +46,11 @@ class RekapitulasiService
             'total' => $total->jumlah
         ];
         return $data;
+    }
+
+    public function getDetailByStudent($userId)
+    {
+
     }
 
     public function getByStudent($userId)
