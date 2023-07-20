@@ -44,7 +44,8 @@
             <th>Nama tagihan</th>
             <th>Jumlah</th>
             <th>Jatuh tempo</th>
-            <th>status</th>
+            <th>Tanggal bayar</th>
+            <th>Status</th>
         </tr>
         <?php foreach ($data['data'] as $i => $rekapitulasi): ?>
             <tr>
@@ -70,7 +71,22 @@
                     <?= $rekapitulasi->jumlah ?>
                 </td>
                 <td>
-                    <?= $rekapitulasi->jatuh_tempo ?>
+                    <?php
+                    $timestamp = strtotime($rekapitulasi->jatuh_tempo);
+                    $date = date('d-m-Y', $timestamp);
+                    echo $date;
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    if ($rekapitulasi->tanggal_bayar !== '-') {
+                        $timestamp = strtotime($rekapitulasi->tanggal_bayar);
+                        $date = date('d-m-Y', $timestamp);
+                        echo $date;
+                    } else {
+                        echo '-';
+                    }
+                    ?>
                 </td>
                 <td>
                     <?= $retVal = ($rekapitulasi->status === 'success') ? 'Lunas' : 'Belum'; ?>

@@ -43,6 +43,7 @@ class Autoload extends AutoloadConfig
         APP_NAMESPACE => APPPATH,
         // For custom app namespace
         'Config' => APPPATH . 'Config',
+        'Modules\Dashboard' => ROOTPATH . 'modules/dashboard',
         'Modules\User' => ROOTPATH . 'modules/user',
         'Modules\Auth' => ROOTPATH . 'modules/auth',
         'Modules\News' => ROOTPATH . 'modules/news',

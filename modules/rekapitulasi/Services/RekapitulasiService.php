@@ -17,13 +17,14 @@ class RekapitulasiService
         $statusList = explode('|', $status);
         $transactions = $this->db->table('transaksi')
             ->select(
-                'transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
-                tagihan.jatuh_tempo AS jatuh_tempo, tagihan.jumlah AS jumlah, 
-                transaksi.status AS status,users.id AS user_id, students.nama AS nama_siswa, 
+                "transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
+                tagihan.jatuh_tempo AS jatuh_tempo, tagihan.jumlah AS jumlah,
+                IF(transaksi.status = 'success', transaksi.updated_at, '-') AS tanggal_bayar, 
+                transaksi.status AS status, students.nama AS nama_siswa, 
                 students.kelas AS kelas,
                 users.email AS email_siswa,
                 users.username AS NIS,
-                transaksi.created_at AS created_at, transaksi.updated_at AS updated_at'
+                transaksi.created_at AS created_at, transaksi.updated_at AS updated_at"
             )
             ->join('tagihan', 'tagihan.id = transaksi.tagihan_id')
             ->join('users', 'users.id = transaksi.user_id')
@@ -43,26 +44,46 @@ class RekapitulasiService
 
         $data = [
             'data' => $transactions,
-            'total' => $total->jumlah
+            'total' => $total->jumlah ?? 0
         ];
         return $data;
     }
 
-    public function getDetailByStudent($userId)
+    public function getOne($id)
     {
-
+        $data = $this->db->table('transaksi')
+            ->select(
+                "transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
+                tagihan.jatuh_tempo AS jatuh_tempo, tagihan.jumlah AS jumlah,
+                tagihan.kode AS tagihan_kode, tagihan.deskripsi AS tagihan_deskripsi,
+                tagihan.created_at AS tanggal_dibuat,
+                IF(transaksi.status = 'success', transaksi.updated_at, '-') AS tanggal_bayar, 
+                transaksi.status AS status, students.nama AS nama_siswa, 
+                students.kelas AS kelas,
+                users.email AS email_siswa,
+                users.username AS NIS,
+                transaksi.created_at AS created_at, transaksi.updated_at AS updated_at"
+            )
+            ->join('tagihan', 'tagihan.id = transaksi.tagihan_id')
+            ->join('users', 'users.id = transaksi.user_id')
+            ->join('students', 'students.user_id = users.id')
+            ->where('transaksi.id', $id)
+            ->orderBy('transaksi.created_at', 'DESC')
+            ->get()->getFirstRow();
+        return $data;
     }
 
     public function getByStudent($userId)
     {
         $transactions = $this->db->table('transaksi')
             ->select(
-                'transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
+                "transaksi.id AS transaksi_id, tagihan.nama AS nama_tagihan, 
             tagihan.jatuh_tempo AS jatuh_tempo, tagihan.jumlah AS jumlah, 
+            IF(transaksi.status = 'success', transaksi.updated_at, '-') AS tanggal_bayar,
             transaksi.status AS status, students.nama AS nama_siswa, students.kelas AS kelas,
             users.email AS email_siswa,
             users.username AS NIS,
-            transaksi.created_at AS created_at, transaksi.updated_at AS updated_at'
+            transaksi.created_at AS created_at, transaksi.updated_at AS updated_at"
             )
             ->join('tagihan', 'tagihan.id = transaksi.tagihan_id')
             ->join('users', 'users.id = transaksi.user_id')
@@ -82,7 +103,7 @@ class RekapitulasiService
 
         $data = [
             'data' => $transactions,
-            'total' => $total->jumlah
+            'total' => $total->jumlah ?? 0
         ];
         return $data;
     }

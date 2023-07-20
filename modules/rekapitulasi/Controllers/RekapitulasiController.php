@@ -26,6 +26,16 @@ class RekapitulasiController extends BaseController
         return $this->respond($data);
     }
 
+    public function getOne($id)
+    {
+        $data = $this->rekapitulasiService->getOne($id);
+        if (!$data) {
+            return $this->respond(['message' => 'rekapitulasi tidak di temukan'], 404);
+        } else {
+            return $this->respond(['data' => $data]);
+        }
+    }
+
     public function getByStudent()
     {
         $user = AuthUtil::getUser();

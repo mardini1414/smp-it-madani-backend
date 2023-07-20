@@ -10,7 +10,7 @@ $routes = Services::routes();
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setDefaultNamespace('Modules\Rekapitulasi\Controllers');
+$routes->setDefaultNamespace('Modules\Dashboard\Controllers');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
@@ -27,12 +27,10 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->group('rekapitulasi', function ($routes) {
-    $routes->get('', 'RekapitulasiController::getAll', ['filter' => 'auth']);
-    $routes->get('(:num)', 'RekapitulasiController::getOne/$1', ['filter' => 'auth']);
-    $routes->get('export', 'RekapitulasiController::export', ['filter' => 'auth']);
-    $routes->get('student', 'RekapitulasiController::getByStudent', ['filter' => 'auth']);
-    $routes->get('export/student', 'RekapitulasiController::exportByStudent', ['filter' => 'auth']);
+$routes->group('dashboard', function ($routes) {
+    $routes->get('all-total', 'DashboardController::getAllTotal', ['filter' => 'auth']);
+    $routes->get('pie-chart', 'DashboardController::getPieChart', ['filter' => 'auth']);
+    $routes->get('line-chart', 'DashboardController::getLineChart', ['filter' => 'auth']);
 });
 
 /*
