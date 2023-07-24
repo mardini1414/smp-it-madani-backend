@@ -41,6 +41,7 @@ class StudentService
                 $this->studentModel->insert([
                     'nama' => $record['nama'],
                     'nisn' => $record['nisn'],
+                    'jenis_kelamin' => $record['jenis kelamin'],
                     'tanggal_lahir' => $date,
                     'tempat_lahir' => $record['tempat lahir'],
                     'nama_wali_murid' => $record['nama wali murid'],

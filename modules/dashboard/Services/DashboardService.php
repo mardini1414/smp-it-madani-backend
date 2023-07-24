@@ -155,8 +155,8 @@ class DashboardService
     {
         $year = date('Y');
         $penerimaan = $this->penerimaanModel->selectSum('jumlah')
-            ->where('MONTH(created_at)', $month)
-            ->where('YEAR(created_at)', $year)
+            ->where('MONTH(bulan_tahun)', $month)
+            ->where('YEAR(bulan_tahun)', $year)
             ->first();
         $rekapitulasi = $this->db->table('transaksi')
             ->selectSum('tagihan.jumlah')->join('tagihan', 'tagihan.id = transaksi.tagihan_id')
@@ -186,8 +186,8 @@ class DashboardService
         $builder = $this->db->table('pengeluaran');
         $data = $builder->select('SUM(sumber_dana_alokasi_anggaran.belanja_operasi) + SUM(sumber_dana_alokasi_anggaran.belanja_modal) AS jumlah')
             ->join('sumber_dana_alokasi_anggaran', 'sumber_dana_alokasi_anggaran.pengeluaran_id = pengeluaran.id')
-            ->where('MONTH(pengeluaran.created_at)', $month)
-            ->where('YEAR(pengeluaran.created_at)', $year)
+            ->where('MONTH(pengeluaran.bulan_tahun)', $month)
+            ->where('YEAR(pengeluaran.bulan_tahun)', $year)
             ->get()->getFirstRow();
         return $data->jumlah ?? 0;
     }
